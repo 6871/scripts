@@ -1,0 +1,4 @@
+- hosts: all
+  roles:
+    - user_sudo_no_pass
+    - hostname_to_etc_hosts

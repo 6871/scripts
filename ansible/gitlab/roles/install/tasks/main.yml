@@ -1,0 +1,59 @@
+# see: https://about.gitlab.com/install/
+# https://about.gitlab.com/install/?version=ce#ubuntu
+#
+# sudo echo "${USER} ALL=(ALL) NOPASSWD: ALL" | sudo -n EDITOR='tee -a' visudo
+
+- name: Update apt cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Update packages
+  become: yes
+  apt:
+    upgrade: safe
+
+- name: Install dependent packages
+  become: yes
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - openssh-server
+      - ca-certificates
+
+- name: Add GPG key
+  become: yes
+  apt_key:
+    url: https://packages.gitlab.com/gitlab/gitlab-ee/gpgkey
+    state: present
+
+- name: Add apt repository for gitlab; distribution
+    "{{ ansible_facts['distribution'] }}"; distribution_release
+    "{{ ansible_facts['distribution_release'] }}"
+  become: yes
+  vars:
+    # trailing "\" for spaceless newline...
+    gitlab_repo_url: "https://packages.gitlab.com/gitlab/gitlab-ce/\
+      {{ ansible_facts['distribution'] | lower }}"
+  apt_repository:
+    repo: deb [arch=amd64] {{ gitlab_repo_url }}
+      {{ ansible_facts['distribution_release'] }} main
+    state: present
+
+- name: Update apt cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Install gitlab
+  become: yes
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - gitlab-ce
+
+- name: Reconfigure gitlab
+  become: yes
+  command: gitlab-ctl reconfigure

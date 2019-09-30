@@ -1,0 +1,29 @@
+- name: cat /etc/sudoers - pre update
+  become: yes
+  shell: cat /etc/sudoers
+  register: sudoers_pre
+
+- name: /etc/sudoers - pre update
+  debug:
+    msg: "{{sudoers_pre.stdout_lines}}"
+
+- name: Check if /etc/sudoers record exists for user {{user_to_grant_sudo}}
+  become: yes
+  shell: >-
+    grep -F "{{etc_sudoers_record}}" /etc/sudoers | wc -l
+  register: existing_sudoers_record_check
+
+- name: Add user {{user_to_grant_sudo}} to sudoers
+  when: existing_sudoers_record_check.stdout == "0"
+  become: yes
+  shell: >-
+    echo '{{etc_sudoers_record}}' | sudo -n EDITOR='tee -a' visudo
+
+- name: cat /etc/sudoers - post update
+  become: yes
+  shell: cat /etc/sudoers
+  register: sudoers_post
+
+- name: /etc/sudoers - post update
+  debug:
+    msg: "{{sudoers_post.stdout_lines}}"

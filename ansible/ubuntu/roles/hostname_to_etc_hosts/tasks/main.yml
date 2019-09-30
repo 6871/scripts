@@ -1,0 +1,41 @@
+- name: cat /etc/hosts - pre update
+  shell: cat /etc/hosts
+  register: etc_hosts_pre
+
+- name: /etc/hosts - pre update
+  debug:
+    msg: "{{etc_hosts_pre.stdout_lines}}"
+
+# Regular expression summary:
+# ((?=^127\.0\.0\.1)(?!.*{{ansible_hostname}}).*$) : IP with missing hostname
+# (                                              ) : defines group 1
+#  (?=^127\.0\.0\.1)                               : find IP at line start
+#   ?=                                             : positive lookahead
+#     ^                                            : line start
+#      127\.0\.0\.1                                : match string (escape .)
+#                   (?!.*{{ansible_hostname}})     : check hostname not added
+#                    ?!                            : negative lookahead
+#                      .*{{ansible_hostname}}      : any char then hostname
+#                                             .*   : any char
+#                                               $  : line end
+# The outer braces define a group that is printed using "\1" in line: below.
+# Use of >- below (multiline input with no newlines) simplifies escaping.
+#
+# Note: ansible_hostname is a built-in variable for the current host.
+- name: Ensure /etc/hosts record 127.0.0.1 has hostname {{ansible_hostname}}
+  become: yes
+  lineinfile:
+    dest: /etc/hosts
+    backrefs: yes
+    regexp: >-
+      ((?=^127\.0\.0\.1)(?!.*{{ansible_hostname}}).*$)
+    line: >-
+      \1 {{ansible_hostname}}
+
+- name: cat /etc/hosts - post update
+  shell: cat /etc/hosts
+  register: etc_hosts_post
+
+- name: /etc/hosts - post update
+  debug:
+    msg: "{{etc_hosts_post.stdout_lines}}"

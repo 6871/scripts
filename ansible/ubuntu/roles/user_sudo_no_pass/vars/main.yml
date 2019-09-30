@@ -1,0 +1,2 @@
+# Define record to add to /etc/sudoers
+etc_sudoers_record: "{{user_to_grant_sudo}} ALL=(ALL) NOPASSWD: ALL"
