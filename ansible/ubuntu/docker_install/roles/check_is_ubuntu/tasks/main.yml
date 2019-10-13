@@ -1,0 +1,4 @@
+- name: Fail if target host distribution is not "Ubuntu"
+  fail:
+    msg: "Can't install to distribution: {{ ansible_facts['distribution'] }}"
+  when: ansible_facts['distribution'] != "Ubuntu"

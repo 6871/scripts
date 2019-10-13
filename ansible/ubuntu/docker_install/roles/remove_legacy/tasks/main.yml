@@ -1,0 +1,14 @@
+# see: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository
+
+- name: Remove legacy Docker packages
+  become: yes
+  apt:
+    name: "{{ packages }}"
+    state: absent
+  vars:
+    packages:
+      - docker
+      - docker-engine
+      - docker.io
+      - containerd
+      - runc

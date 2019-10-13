@@ -1,0 +1,19 @@
+# see: https://docs.docker.com/install/linux/linux-postinstall/
+
+- name: Create Docker group "{{ docker_group }}"
+  become: yes
+  group:
+    name: "{{ docker_group }}"
+    state: present
+
+- name: Add user "{{ docker_user }}" to group "{{ docker_group }}"
+  become: yes
+  user:
+    name: "{{ docker_user }}"
+    group: "{{ docker_group }}"
+    append: yes
+
+- name: Print post-install notes
+  debug:
+    msg:
+      - "NOTE: Reboot may be required to correctly pickup group changes"

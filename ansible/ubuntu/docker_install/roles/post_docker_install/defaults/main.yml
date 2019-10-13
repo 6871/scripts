@@ -1,0 +1,5 @@
+# Name to use for Docker group
+docker_group: docker
+
+# User to add to docker group; default to current
+docker_user: "{{ ansible_user_id }}"

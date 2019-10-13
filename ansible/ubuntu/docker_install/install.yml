@@ -1,0 +1,7 @@
+- hosts: all
+  roles:
+    - check_is_ubuntu
+    - remove_legacy
+    - install_docker
+    - post_docker_install
+    - install_docker_compose

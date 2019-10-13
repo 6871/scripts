@@ -1,0 +1,61 @@
+# see: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository
+
+- name: Debug output ansible_facts (verbosity level 1)
+  debug:
+    msg:
+      - "{{ ansible_facts }}"
+    verbosity: 1
+
+- name: Update apt cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Upgrade packages; apt_upgrade="{{apt_upgrade}}"
+  become: yes
+  apt:
+    upgrade: "{{ apt_upgrade }}"
+  when: apt_upgrade != "no"
+
+- name: Install packages to allow apt to use a repository over HTTPS
+  become: yes
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg-agent
+      - software-properties-common
+
+- name: Add Docker's GPG key
+  become: yes
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add apt repository for docker; using distribution_release
+    "{{ ansible_facts['distribution_release'] }}"
+  become: yes
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu
+      {{ ansible_facts['distribution_release'] }} stable
+    state: present
+  vars:
+    current_release:
+
+- name: Update apt cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Install Docker packages
+  become: yes
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io

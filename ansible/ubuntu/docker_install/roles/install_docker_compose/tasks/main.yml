@@ -1,0 +1,20 @@
+# see: https://docs.docker.com/compose/install/
+
+- name: Debug output ansible_facts (verbosity level 1)
+  debug:
+    msg:
+      - "{{ ansible_facts }}"
+    verbosity: 1
+
+- name: Install docker-compose "{{docker_compose_version}}" for system
+    "{{ ansible_facts['system'] }}" architecture
+    "{{ ansible_facts['architecture'] }}"
+  become: yes
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/\
+      {{ docker_compose_version }}/\
+      docker-compose-{{ ansible_facts['system'] }}\
+      -{{ ansible_facts['architecture'] }}"
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
+  when: docker_compose_version is defined
