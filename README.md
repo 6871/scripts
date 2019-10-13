@@ -14,5 +14,5 @@
     - [time_utils.sh](bash/time_utils.sh)
 - [macOS](macOS)
     - [bash](macOS/bash)
-        - [macOS/bash/disk_utils.sh](macOS/bash/disk_utils.sh)
-        - [macOS/bash/file_utils.sh](macOS/bash/file_utils.sh)
+        - [disk_utils.sh](macOS/bash/disk_utils.sh)
+        - [file_utils.sh](macOS/bash/file_utils.sh)
