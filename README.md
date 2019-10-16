@@ -9,6 +9,7 @@
 # Bash scripts
 
 - [bash](bash)
+    - [ip_utils.sh](bash/ip_utils.sh)
     - [java_utils.sh](bash/java_utils.sh)
     - [terraform_utils.sh](bash/terraform_utils.sh)
     - [time_utils.sh](bash/time_utils.sh)
