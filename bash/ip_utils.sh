@@ -29,7 +29,7 @@ function ip_list() {
       | grep -F "${filter}")
 
     if [[ ${#match} -gt 0 ]]; then
-      printf '%s\n' "${ip}" | grep --color -F "${filter}"
+      printf '%s\n' "${ip}" | grep --color -F "${filter:-${ip}}"
     fi
   done
 }
