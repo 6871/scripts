@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Markdown related helper functions.
+# Markdown related helper functions. Use print_md_index to generate markdown.
 
 ##############################################################################
 # Internal function to print a list output row.
 #
 # Arguments:
-#   1 : Start directory
+#   1 : List item path (file or directory)
 #   2 : Current depth in directory hierarchy
 function md_utils_print_list_row() {
   local path="${1}"
