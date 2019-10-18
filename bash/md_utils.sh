@@ -2,7 +2,7 @@
 # Markdown related helper functions. Use print_md_index to generate markdown.
 
 ##############################################################################
-# Internal function to print a list output row.
+# Internal function to print a list output row in markdown format.
 #
 # Arguments:
 #   1 : List item path (file or directory)
@@ -10,10 +10,9 @@
 function md_utils_print_list_row() {
   local path="${1}"
   local depth="${2}"
-  local name
-  name="$(basename "${path}")"
 
-  printf "%$(( "${depth}" * 2 ))s- [%s](%s)\n" "" "${name}" "${path}"
+  printf "%$(( "${depth}" * 2 ))s- [%s](%s)\n" \
+    "" "$(basename "${path}")" "${path}"
 }
 
 ##############################################################################
@@ -45,6 +44,7 @@ function md_utils_find_dirs() {
   local start_dir="${1}"
   local current_depth="${2}"
   local dir
+
   find "${start_dir}" -maxdepth 1 -type d \
     -not -path '*/\.*' \
     -not -path "${start_dir}" \
