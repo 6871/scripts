@@ -39,7 +39,7 @@ function get_latest_terraform_version() {
   | grep -Eo '^\s*<a [^>]*>terraform_[0-9]+\.[0-9]+\.[0-9]+<' \
   | grep -Eo 'terraform_[0-9]+\.[0-9]+\.[0-9]+' \
   | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+' \
-  | awk -F "." '{printf "%03s.%03s.%03s %s\n", $1, $2, $3, $0}' \
+  | awk -F "." '{printf "%03d.%03d.%03d %s\n", $1, $2, $3, $0}' \
   | sort \
   | tail -1 \
   | cut -d " " -f 2
