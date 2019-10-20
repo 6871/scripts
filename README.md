@@ -52,3 +52,5 @@
   - [bash](./macOS/bash)
     - [disk_utils.sh](./macOS/bash/disk_utils.sh)
     - [file_utils.sh](./macOS/bash/file_utils.sh)
+
+<sub>Regenerate with: ```. <(curl -Ls https://raw.githubusercontent.com/6871/scripts/master/bash/md_utils.sh) && print_md_index```</sub>
