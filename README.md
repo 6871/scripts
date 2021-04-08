@@ -1,8 +1,8 @@
 - [ansible](./ansible)
   - [ubuntu](./ansible/ubuntu)
     - [docker_install](./ansible/ubuntu/docker_install)
-      - [install.yml](./ansible/ubuntu/docker_install/install.yml)
       - [README.md](./ansible/ubuntu/docker_install/README.md)
+      - [install.yml](./ansible/ubuntu/docker_install/install.yml)
       - [roles](./ansible/ubuntu/docker_install/roles)
         - [check_is_ubuntu](./ansible/ubuntu/docker_install/roles/check_is_ubuntu)
           - [tasks](./ansible/ubuntu/docker_install/roles/check_is_ubuntu/tasks)
@@ -31,6 +31,7 @@
             - [main.yml](./ansible/ubuntu/gitlab/roles/install/tasks/main.yml)
     - [host_setup](./ansible/ubuntu/host_setup)
       - [install_all.yml](./ansible/ubuntu/host_setup/install_all.yml)
+      - [install_sudo_no_pass.yml](./ansible/ubuntu/host_setup/install_sudo_no_pass.yml)
       - [roles](./ansible/ubuntu/host_setup/roles)
         - [hostname_to_etc_hosts](./ansible/ubuntu/host_setup/roles/hostname_to_etc_hosts)
           - [README.md](./ansible/ubuntu/host_setup/roles/hostname_to_etc_hosts/README.md)
@@ -52,5 +53,7 @@
   - [bash](./macOS/bash)
     - [disk_utils.sh](./macOS/bash/disk_utils.sh)
     - [file_utils.sh](./macOS/bash/file_utils.sh)
+- [python](./python)
+  - [md_toc.py](./python/md_toc.py)
 
-<sub>Regenerate with: ```. <(curl -Ls https://raw.githubusercontent.com/6871/scripts/master/bash/md_utils.sh) && print_md_index```</sub>
+<sub>Regenerate with: ```. <(curl -Ls https://raw.githubusercontent.com/6871/scripts/master/bash/md_utils.sh) && print_md_index``` or ```./bash/md_utils.sh .```</sub>

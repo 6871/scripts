@@ -11,7 +11,7 @@ function md_utils_print_list_row() {
   local path="${1}"
   local depth="${2}"
 
-  printf "%$(( "${depth}" * 2 ))s- [%s](%s)\n" \
+  printf "%$(( depth * 2 ))s- [%s](%s)\n" \
     "" "$(basename "${path}")" "${path}"
 }
 
@@ -50,7 +50,7 @@ function md_utils_find_dirs() {
     -not -path "${start_dir}" \
   | sort | while read -r dir; do
     md_utils_print_list_row "${dir}" "${current_depth}"
-    md_utils_find_files_and_dirs "${dir}" $(( "${current_depth}" + 1 ))
+    md_utils_find_files_and_dirs "${dir}" $(( current_depth + 1 ))
   done
 }
 
@@ -66,3 +66,5 @@ function print_md_index() {
 
   md_utils_find_dirs "${start_dir}" 0
 }
+
+print_md_index "$@"
