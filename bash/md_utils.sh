@@ -8,11 +8,11 @@
 #   1 : List item path (file or directory)
 #   2 : Current depth in directory hierarchy
 function md_utils_print_list_row() {
-  local path="${1}"
+  local local_path="${1}"
   local depth="${2}"
 
   printf "%$(( depth * 2 ))s- [%s](%s)\n" \
-    "" "$(basename "${path}")" "${path}"
+    "" "$(basename "${local_path}")" "${local_path}"
 }
 
 ##############################################################################
@@ -67,4 +67,4 @@ function print_md_index() {
   md_utils_find_dirs "${start_dir}" 0
 }
 
-print_md_index "$@"
+#print_md_index "$@"
